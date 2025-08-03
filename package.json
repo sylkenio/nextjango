@@ -8,7 +8,7 @@
   },
   "type": "module",
   "bin": {
-    "nextjango": "./dist/bin/nextjango.js"
+    "nextjango": "./dist/src/bin/nextjango.js"
   },
   "scripts": {
     "dev": "tsx src/index.ts",
