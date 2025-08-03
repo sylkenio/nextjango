@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                     // Modern JS
+    "module": "ESNext",                     // Allows dynamic import, top-level await
+    "moduleResolution": "Node",             // Node-style resolution
+    "outDir": "dist",                       // Output goes here
+    "rootDir": ".",                         // Accepts src/, bin/, scripts/
+    "esModuleInterop": true,                // Required for common packages (like chalk)
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,                         // Enforces type safety
+    "skipLibCheck": true                    // Skips type-checking node_modules
+  },
+  "include": ["src", "src/bin"]                 // Includes your CLI and logic files
+}

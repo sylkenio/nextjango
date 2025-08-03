@@ -1,0 +1,17 @@
+# Build and dependencies
+node_modules/
+dist/
+.next/
+out/
+build/
+
+# Logs
+*.log
+
+# Env and config
+.env*
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db

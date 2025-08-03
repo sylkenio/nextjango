@@ -1,0 +1,30 @@
+{
+  "name": "nextjango",
+  "version": "0.1.0",
+  "description": "CLI to scaffold fullstack Next.js + Django projects",
+  "author": {
+    "name": "Sylken",
+    "url": "https://sylken.io"
+  },
+  "type": "module",
+  "bin": {
+    "nextjango": "./dist/bin/nextjango.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc && pnpm inject-shebang",
+    "inject-shebang": "node scripts/inject-shebang.js",
+    "link": "pnpm link --global"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "execa": "^8.0.1",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
