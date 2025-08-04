@@ -17,6 +17,29 @@
     "link": "pnpm link --global",
     "nj": "nextjango"
   },
+  "keywords": [
+    "cli",
+    "fullstack",
+    "nextjs",
+    "django",
+    "scaffold",
+    "boilerplate",
+    "generator",
+    "typescript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sylkenio/nextjango"
+  },
+  "bugs": {
+    "url": "https://github.com/sylkenio/nextjango/issues"
+  },
+  "homepage": "https://github.com/sylkenio/nextjango#readme",
+  "preferGlobal": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
