@@ -12,10 +12,11 @@
   },
   "scripts": {
     "dev": "tsx src/index.ts",
-    "build": "tsc && pnpm inject-shebang",
+    "build": "tsc && node scripts/copy-templates.js && pnpm inject-shebang",
     "inject-shebang": "node scripts/inject-shebang.js",
     "link": "pnpm link --global",
-    "nj": "nextjango"
+    "nj": "nextjango",
+    "copy-templates": "cpy \"templates/**\" dist --cwd=."
   },
   "keywords": [
     "cli",
@@ -47,7 +48,9 @@
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.30",
+    "cpy": "^11.1.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   }
