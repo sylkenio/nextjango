@@ -1,0 +1,24 @@
+# Exclude dev-only stuff
+src/
+scripts/
+tsconfig*.json
+*.ts
+*.tsx
+*.test.*
+jest.config.*
+coverage/
+node_modules/
+.env
+.env.*
+
+# Ignore IDE/editor junk
+.vscode/
+.idea/
+.DS_Store
+
+# Exclude GitHub and design-only assets
+README.md
+assets/            # <- this is just for GitHub banner, not runtime
+*.psd
+*.fig
+*.svg
