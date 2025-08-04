@@ -11,6 +11,10 @@ program
 program
   .command("init")
   .description("Initialize a new Nextjango project")
-  .action(init);
+  .option(
+    "-p, --package-manager <pm>",
+    "Manually specify the package manager (pnpm, yarn, npm, bun)"
+  )
+  .action((opts) => init(opts));
 
 program.parse();

@@ -3,14 +3,21 @@ import fs from "fs-extra";
 import { fileURLToPath } from "url";
 import { cwd } from "process";
 import { execa } from "execa";
-import { detectPackageManager } from "../utils/detectPackageManager.js";
+import {
+  detectPackageManager,
+  type PackageManager,
+} from "../utils/detectPackageManager.js";
 const { copy, existsSync } = fs;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const TEMPLATE_DIR = path.resolve(__dirname, "../../templates");
 
-export async function init() {
+interface InitOptions {
+  packageManager?: PackageManager;
+}
+
+export async function init(options: InitOptions = {}) {
   const destination = cwd();
 
   console.log("🚀 Initializing your Nextjango project...\n");
@@ -35,7 +42,17 @@ export async function init() {
     return;
   }
 
-  const packageManager = detectPackageManager(frontendDir);
+  const packageManager = detectPackageManager(
+    frontendDir,
+    options.packageManager
+  );
+
+  if (!packageManager) {
+    console.error(
+      "❌ No lockfile found in frontend/. Please specify a package manager with --package-manager."
+    );
+    return;
+  }
 
   console.log(
     `📦 Installing frontend dependencies using ${packageManager}...\n`
