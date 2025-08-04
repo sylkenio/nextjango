@@ -35,7 +35,7 @@ export async function init() {
     return;
   }
 
-  const packageManager = detectPackageManager(destination);
+  const packageManager = detectPackageManager(frontendDir);
 
   console.log(
     `📦 Installing frontend dependencies using ${packageManager}...\n`
