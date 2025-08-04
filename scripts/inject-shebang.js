@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const filePath = path.resolve(__dirname, "../dist/src/bin/nextjango.js");
+const filePath = path.resolve(__dirname, "../dist/bin/nextjango.js");
 
 if (!fs.existsSync(filePath)) {
   console.error("❌ Build output not found. Did tsc fail?");
