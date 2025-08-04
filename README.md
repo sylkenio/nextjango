@@ -1,4 +1,4 @@
-![Nextjango Banner](https://raw.githubusercontent.com/YOUR_USERNAME/NEXTJANGO_REPO/main/assets/nextjango-github-banner.png)
+![Nextjango Banner](https://github.com/sylkenio/nextjango/blob/master/main/assets/nextjango-github-banner.png)
 
 # ⚡ Nextjango
 
