@@ -36,6 +36,12 @@ Initialize Nextjango in a project directory:
 npx nextjango init
 ```
 
+You can manually specify the package manager (useful when no lockfile is present):
+
+```bash
+npx nextjango init --package-manager pnpm
+```
+
 Create a full-stack page (auto-wired front to back):
 
 ```bash
