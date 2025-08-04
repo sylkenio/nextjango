@@ -14,7 +14,8 @@
     "dev": "tsx src/index.ts",
     "build": "tsc && pnpm inject-shebang",
     "inject-shebang": "node scripts/inject-shebang.js",
-    "link": "pnpm link --global"
+    "link": "pnpm link --global",
+    "nj": "nextjango"
   },
   "dependencies": {
     "chalk": "^5.3.0",
