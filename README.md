@@ -2,6 +2,8 @@
 
 # ⚡ Nextjango
 
+[![npm](https://img.shields.io/npm/v/nextjango.svg)](https://www.npmjs.com/package/nextjango)
+
 > Scaffold modern full-stack apps with Next.js + Django — instantly.
 
 **Nextjango** is a blazing-fast CLI tool that jumpstarts your full-stack development
