@@ -15,4 +15,3 @@
   "include": ["src", "src/bin"],
   "exclude": ["templates", "dist", "node_modules"]
   }
-  
