@@ -82,3 +82,13 @@ my-app/
 │   └── ...
 └── shared/           # Common types, constants, or utils (optional)
 ```
+
+## 🧑‍💻 Development
+
+Start both backend and frontend dev servers together:
+
+```bash
+./shared/dev.sh
+```
+
+This helper script runs `python manage.py runserver` and `npm run dev` concurrently.
