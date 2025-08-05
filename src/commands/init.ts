@@ -10,7 +10,7 @@ import {
   detectPackageManager,
   type PackageManager,
 } from "../utils/detectPackageManager.js";
-import { promptPackageManager } from "../utils/promptPackageManager";
+import { promptPackageManager } from "../utils/promptPackageManager.js";
 const { copy, existsSync } = fs;
 
 const __filename = fileURLToPath(import.meta.url);
