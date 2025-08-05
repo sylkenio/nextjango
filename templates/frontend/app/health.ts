@@ -8,7 +8,7 @@ export async function checkHealth() {
 
   let res: Response;
   try {
-    res = await fetch(`${apiUrl}/api/health`);
+    res = await fetch(`${apiUrl}/api/health/`);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     throw new Error(`Failed to fetch backend status: ${message}`);
