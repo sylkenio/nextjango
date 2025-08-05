@@ -81,6 +81,54 @@ export async function init(options: InitOptions = {}) {
     process.exit(1);
   }
 
+  // Install backend dependencies using pip
+  const backendDir = path.join(destination, "backend");
+  const requirementsPath = path.join(backendDir, "requirements.txt");
+  const hasRequirements = existsSync(requirementsPath);
+
+  if (!hasRequirements) {
+    console.warn(
+      chalk.yellow(
+        "⚠️  No requirements.txt found in backend/. Skipping dependency installation."
+      )
+    );
+  } else {
+    const backendSpinner = ora(
+      "Installing backend dependencies using pip..."
+    ).start();
+    try {
+      await execa(
+        "python",
+        ["-m", "pip", "install", "-r", "requirements.txt"],
+        {
+          cwd: backendDir,
+          stdio: "ignore",
+        }
+      );
+      backendSpinner.succeed(
+        chalk.green("Dependencies installed in backend/ using pip")
+      );
+    } catch (err) {
+      backendSpinner.fail(chalk.red("Failed to install backend dependencies."));
+      console.error(err);
+    }
+
+    const managePyPath = path.join(backendDir, "manage.py");
+    if (existsSync(managePyPath)) {
+      const migrateSpinner = ora("Running database migrations...").start();
+      try {
+        await execa("python", ["manage.py", "migrate"], {
+          cwd: backendDir,
+          stdio: "ignore",
+        });
+        migrateSpinner.succeed(chalk.green("Database prepared."));
+      } catch (err) {
+        migrateSpinner.fail(chalk.red("Failed to run database migrations."));
+        console.error(err);
+      }
+    }
+  }
+
   // Check for package.json in frontend/
   const frontendDir = path.join(destination, "frontend");
   const packageJsonPath = path.join(frontendDir, "package.json");
