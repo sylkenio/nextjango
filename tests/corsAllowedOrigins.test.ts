@@ -1,13 +1,10 @@
 import { describe, it, expect, test } from "vitest";
 import { execa } from "execa";
 import path from "path";
+import { isPythonAvailable } from "./utils/python";
 
-let hasPython = true;
-try {
-  await execa("python", ["--version"], { shell: false });
-} catch {
-  hasPython = false;
-}
+const hasPython = await isPythonAvailable();
+
 if (!hasPython) {
   test.skip("Python is required to run CORS origin tests", () => {});
 } else {
