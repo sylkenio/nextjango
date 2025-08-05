@@ -54,7 +54,11 @@ describe("init command", () => {
     writeFileSync(path.join(frontend, "package.json"), "{}");
     const original = process.cwd();
     process.chdir(tmp);
+    execaMock.mockClear();
     await init({ packageManager: "pnpm" });
+    expect(execaMock).toHaveBeenCalledWith("pnpm", ["--version"], {
+      stdio: "ignore",
+    });
     expect(execaMock).toHaveBeenCalledWith("pnpm", ["install"], {
       cwd: frontend,
       stdio: "ignore",
@@ -62,6 +66,32 @@ describe("init command", () => {
     process.chdir(original);
     rmSync(tmp, { recursive: true, force: true });
   });
+
+  it("aborts when package manager is missing", async () => {
+    const tmp = mkdtempSync(path.join(tmpdir(), "init-"));
+    const frontend = path.join(tmp, "frontend");
+    mkdirSync(frontend, { recursive: true });
+    writeFileSync(path.join(frontend, "package.json"), "{}");
+    const original = process.cwd();
+    process.chdir(tmp);
+
+    execaMock.mockReset();
+    execaMock.mockRejectedValueOnce(new Error("not found"));
+
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await init({ packageManager: "pnpm" });
+
+    expect(errorSpy).toHaveBeenCalled();
+    expect(execaMock).toHaveBeenCalledTimes(1);
+    expect(execaMock.mock.calls[0][0]).toBe("pnpm");
+    expect(execaMock.mock.calls[0][1]).toEqual(["--version"]);
+
+    errorSpy.mockRestore();
+    process.chdir(original);
+    rmSync(tmp, { recursive: true, force: true });
+  });
+
   it("aborts when Python is missing", async () => {
     const tmp = mkdtempSync(path.join(tmpdir(), "init-"));
     const backend = path.join(tmp, "backend");
