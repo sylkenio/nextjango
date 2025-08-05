@@ -16,7 +16,7 @@ Built for developers who want flexibility, security, and complete control
 ## 🚀 Features
 
 - ✅ Generate a full-stack project with `Next.js` + `Django` in seconds
-- 🧱 Built-in support for **TypeScript**, **Tailwind CSS**, and **PostgreSQL**
+- 🧱 Built-in support for **TypeScript**, **Tailwind CSS**, and **SQLite** (default; support for other databases is planned)
 - 🔒 Secure backend with Django and admin path obfuscation
 - 🔗 API-ready and configurable for REST or GraphQL (coming soon)
 - 🧪 Developer-first architecture with batteries included, but replaceable
