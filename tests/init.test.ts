@@ -61,7 +61,8 @@ describe("init command", () => {
     });
     expect(execaMock).toHaveBeenCalledWith("pnpm", ["install"], {
       cwd: frontend,
-      stdio: "ignore",
+      stdout: "inherit",
+      stderr: "pipe",
     });
     process.chdir(original);
     rmSync(tmp, { recursive: true, force: true });
@@ -112,6 +113,60 @@ describe("init command", () => {
     expect(execaMock).toHaveBeenCalledTimes(1);
     expect(execaMock.mock.calls[0][0]).toBe("python");
     expect(execaMock.mock.calls[0][1]).toEqual(["--version"]);
+
+    errorSpy.mockRestore();
+    process.chdir(original);
+    rmSync(tmp, { recursive: true, force: true });
+  });
+
+  it("logs stderr when backend dependency installation fails", async () => {
+    const tmp = mkdtempSync(path.join(tmpdir(), "init-"));
+    const backend = path.join(tmp, "backend");
+    mkdirSync(backend, { recursive: true });
+    writeFileSync(path.join(backend, "requirements.txt"), "");
+    const original = process.cwd();
+    process.chdir(tmp);
+
+    const error = new Error("pip failed");
+    // @ts-ignore
+    error.stderr = "pip install error";
+    execaMock.mockReset();
+    execaMock
+      .mockResolvedValueOnce({}) // python --version
+      .mockRejectedValueOnce(error); // pip install
+
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await init();
+
+    expect(errorSpy).toHaveBeenCalledWith("pip install error");
+
+    errorSpy.mockRestore();
+    process.chdir(original);
+    rmSync(tmp, { recursive: true, force: true });
+  });
+
+  it("logs stderr when frontend dependency installation fails", async () => {
+    const tmp = mkdtempSync(path.join(tmpdir(), "init-"));
+    const frontend = path.join(tmp, "frontend");
+    mkdirSync(frontend, { recursive: true });
+    writeFileSync(path.join(frontend, "package.json"), "{}");
+    const original = process.cwd();
+    process.chdir(tmp);
+
+    const error = new Error("install failed");
+    // @ts-ignore
+    error.stderr = "pnpm install error";
+    execaMock.mockReset();
+    execaMock
+      .mockResolvedValueOnce({}) // pnpm --version
+      .mockRejectedValueOnce(error); // pnpm install
+
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await init({ packageManager: "pnpm" });
+
+    expect(errorSpy).toHaveBeenCalledWith("pnpm install error");
 
     errorSpy.mockRestore();
     process.chdir(original);
