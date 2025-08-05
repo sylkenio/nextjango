@@ -26,6 +26,11 @@ const oraMock = vi.fn(() => ({
 }));
 vi.mock("ora", () => ({ default: oraMock }));
 
+const promptPackageManagerMock = vi.fn().mockResolvedValue("pnpm");
+vi.mock("../src/utils/promptPackageManager.ts", () => ({
+  promptPackageManager: promptPackageManagerMock,
+}));
+
 let init: typeof import("../src/commands/init.ts")["init"];
 
 beforeAll(async () => {
@@ -63,6 +68,24 @@ describe("init command", () => {
       cwd: frontend,
       stdout: "inherit",
       stderr: "pipe",
+    });
+    process.chdir(original);
+    rmSync(tmp, { recursive: true, force: true });
+  });
+
+  it("prompts for a package manager when no lockfile is present", async () => {
+    const tmp = mkdtempSync(path.join(tmpdir(), "init-"));
+    const frontend = path.join(tmp, "frontend");
+    mkdirSync(frontend, { recursive: true });
+    writeFileSync(path.join(frontend, "package.json"), "{}");
+    const original = process.cwd();
+    process.chdir(tmp);
+    promptPackageManagerMock.mockClear();
+    execaMock.mockClear();
+    await init();
+    expect(promptPackageManagerMock).toHaveBeenCalled();
+    expect(execaMock).toHaveBeenCalledWith("pnpm", ["--version"], {
+      stdio: "ignore",
     });
     process.chdir(original);
     rmSync(tmp, { recursive: true, force: true });
