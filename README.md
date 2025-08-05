@@ -20,6 +20,12 @@ Built for developers who want flexibility, security, and complete control
 - 🧪 Developer-first architecture with batteries included, but replaceable
 - 🧰 Easily extendable with custom page and model generators
 
+## 🐍 Optional Python requirement
+
+Python 3 is optional but needed for the Django backend and for running
+the Python-dependent test suites. When Python isn't installed, those
+tests will automatically be skipped.
+
 ## 📦 Installation
 
 Install Nextjango globally (optional):
