@@ -17,7 +17,7 @@ describe("frontend fetch logic", () => {
 
     const result = await checkHealth();
     expect(result).toEqual(data);
-    expect(mockFetch).toHaveBeenCalledWith("http://example.com/api/health");
+    expect(mockFetch).toHaveBeenCalledWith("http://example.com/api/health/");
   });
 
   it("throws when backend is unreachable", async () => {
@@ -40,6 +40,6 @@ describe("frontend fetch logic", () => {
 
     const result = await checkHealth();
     expect(result).toEqual(data);
-    expect(mockFetch).toHaveBeenCalledWith("http://localhost:8000/api/health");
+    expect(mockFetch).toHaveBeenCalledWith("http://localhost:8000/api/health/");
   });
 });
