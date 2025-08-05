@@ -26,4 +26,18 @@ describe("frontend fetch logic", () => {
 
     await expect(checkHealth()).rejects.toThrow();
   });
+
+  it("uses default API URL when environment variable is missing", async () => {
+    delete process.env.NEXT_PUBLIC_API_URL;
+    const data = { status: "ok" };
+    const mockFetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(data),
+    });
+    (global as any).fetch = mockFetch;
+
+    const result = await checkHealth();
+    expect(result).toEqual(data);
+    expect(mockFetch).toHaveBeenCalledWith("http://localhost:8000/api/health");
+  });
 });
