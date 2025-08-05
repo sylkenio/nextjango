@@ -17,7 +17,8 @@
     "link": "pnpm link --global",
     "nj": "nextjango",
     "copy-templates": "cpy \"templates/**\" dist --cwd=.",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "node scripts/check-newlines.js"
   },
   "keywords": [
     "cli",
