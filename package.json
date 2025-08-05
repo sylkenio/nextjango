@@ -16,7 +16,8 @@
     "inject-shebang": "node scripts/inject-shebang.js",
     "link": "pnpm link --global",
     "nj": "nextjango",
-    "copy-templates": "cpy \"templates/**\" dist --cwd=."
+    "copy-templates": "cpy \"templates/**\" dist --cwd=.",
+    "test": "vitest"
   },
   "keywords": [
     "cli",
@@ -46,7 +47,8 @@
     "commander": "^11.1.0",
     "execa": "^8.0.1",
     "fs-extra": "^11.2.0",
-    "ora": "^7.0.1"
+    "ora": "^7.0.1",
+    "vitest": "^3.2.4"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
