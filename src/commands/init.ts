@@ -10,6 +10,7 @@ import {
   detectPackageManager,
   type PackageManager,
 } from "../utils/detectPackageManager.js";
+import { promptPackageManager } from "../utils/promptPackageManager";
 const { copy, existsSync } = fs;
 
 const __filename = fileURLToPath(import.meta.url);
@@ -178,18 +179,13 @@ export async function init(options: InitOptions = {}) {
     return;
   }
 
-  const packageManager = detectPackageManager(
+  let packageManager = detectPackageManager(
     frontendDir,
     options.packageManager
   );
 
   if (!packageManager) {
-    console.error(
-      chalk.red(
-        "❌ No lockfile found in frontend/. Please specify a package manager with --package-manager."
-      )
-    );
-    return;
+    packageManager = await promptPackageManager();
   }
 
   try {
