@@ -1,5 +1,12 @@
 export async function checkHealth() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/health`);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+  try {
+    new URL(apiUrl);
+  } catch {
+    throw new Error("NEXT_PUBLIC_API_URL is not a valid URL");
+  }
+
+  const res = await fetch(`${apiUrl}/api/health`);
   if (!res.ok) {
     throw new Error("Failed to fetch backend status");
   }
