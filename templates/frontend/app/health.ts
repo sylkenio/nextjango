@@ -6,7 +6,13 @@ export async function checkHealth() {
     throw new Error("NEXT_PUBLIC_API_URL is not a valid URL");
   }
 
-  const res = await fetch(`${apiUrl}/api/health`);
+  let res: Response;
+  try {
+    res = await fetch(`${apiUrl}/api/health`);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    throw new Error(`Failed to fetch backend status: ${message}`);
+  }
   if (!res.ok) {
     throw new Error("Failed to fetch backend status");
   }
