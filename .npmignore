@@ -11,6 +11,9 @@ node_modules/
 .env
 .env.*
 
+**/__pycache__/
+*.py[cod]
+
 # Ignore IDE/editor junk
 .vscode/
 .idea/

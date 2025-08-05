@@ -5,6 +5,9 @@ dist/
 out/
 build/
 
+**/__pycache__/
+*.py[cod]
+
 # Logs
 *.log
 
