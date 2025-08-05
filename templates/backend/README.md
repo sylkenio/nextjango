@@ -11,11 +11,5 @@ The Django settings in this template read configuration from the environment:
 - `ALLOWED_HOSTS` &mdash; Comma-separated list of hosts the app will serve. Defaults to an empty list.
 - `CORS_ALLOWED_ORIGINS` &mdash; Comma-separated list of allowed origins for cross-origin requests. Defaults to `http://localhost:3000`. Empty entries are ignored.
 
-By default the project uses SQLite for local development. To switch to PostgreSQL
-(for example, in production), set the following environment variables:
-
-- `POSTGRES_DB`
-- `POSTGRES_USER`
-- `POSTGRES_PASSWORD`
-- `POSTGRES_HOST` (optional, defaults to `localhost`)
-- `POSTGRES_PORT` (optional, defaults to `5432`)
+By default the project uses SQLite for local development. Support for other
+databases will be added in future releases.
