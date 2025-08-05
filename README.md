@@ -52,6 +52,14 @@ You can also specify one manually:
 npx nextjango init --package-manager pnpm
 ```
 
+## 🧑‍💻 Development
+
+Start both backend and frontend dev servers together:
+
+```bash
+npm run dev
+```
+
 Create a full-stack page (auto-wired front to back):
 
 ```bash
@@ -91,12 +99,4 @@ my-app/
 ├── backend/          # Django + REST-ready setup
 │   └── ...
 └── shared/           # Common types, constants, or utils (optional)
-```
-
-## 🧑‍💻 Development
-
-Start both backend and frontend dev servers together:
-
-```bash
-npm run dev
 ```
