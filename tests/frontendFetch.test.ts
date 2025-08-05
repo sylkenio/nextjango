@@ -24,7 +24,9 @@ describe("frontend fetch logic", () => {
     const mockFetch = vi.fn().mockRejectedValue(new Error("fail"));
     (global as any).fetch = mockFetch;
 
-    await expect(checkHealth()).rejects.toThrow();
+    await expect(checkHealth()).rejects.toThrow(
+      "Failed to fetch backend status: fail"
+    );
   });
 
   it("uses default API URL when environment variable is missing", async () => {
