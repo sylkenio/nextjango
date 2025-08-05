@@ -1,6 +1,8 @@
 ![Nextjango Banner](https://github.com/sylkenio/nextjango/blob/master/main/assets/nj-github-banner.png)
 
-# ⚡ Nextjango (CURRENTLY IN DEVELOPMENT, STAY TUNED!)
+# ⚡ Nextjango
+
+# (CURRENTLY IN DEVELOPMENT, STAY TUNED!)
 
 [![npm](https://img.shields.io/npm/v/nextjango.svg)](https://www.npmjs.com/package/nextjango)
 
