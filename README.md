@@ -1,6 +1,6 @@
 ![Nextjango Banner](https://github.com/sylkenio/nextjango/blob/master/main/assets/nj-github-banner.png)
 
-# ⚡ Nextjango
+# ⚡ Nextjango (CURRENTLY IN DEVELOPMENT, STAY TUNED!)
 
 [![npm](https://img.shields.io/npm/v/nextjango.svg)](https://www.npmjs.com/package/nextjango)
 
@@ -42,7 +42,9 @@ Initialize Nextjango in a project directory:
 npx nextjango init
 ```
 
-You can manually specify the package manager (useful when no lockfile is present):
+The CLI will prompt you to select a package manager if none is detected (use the arrow keys).
+
+You can also specify one manually:
 
 ```bash
 npx nextjango init --package-manager pnpm
