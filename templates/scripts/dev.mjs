@@ -1,4 +1,4 @@
-import { spawn } from "child_process";
+import { spawn, spawnSync } from "child_process";
 import { existsSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -20,6 +20,20 @@ const frontendDir = path.join(rootDir, "frontend");
 
 const packageManager = detectPackageManager(frontendDir) || "npm";
 const frontendArgs = packageManager === "npm" ? ["run", "dev"] : ["dev"];
+
+function runSync(command, args) {
+  const result = spawnSync(command, args, {
+    cwd: backendDir,
+    stdio: "inherit",
+    shell: true,
+  });
+  if (result.status !== 0) {
+    process.exit(result.status ?? 1);
+  }
+}
+
+runSync("python", ["manage.py", "makemigrations"]);
+runSync("python", ["manage.py", "migrate"]);
 
 const backend = spawn("python", ["manage.py", "runserver"], {
   cwd: backendDir,
