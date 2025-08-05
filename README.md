@@ -98,7 +98,5 @@ my-app/
 Start both backend and frontend dev servers together:
 
 ```bash
-./shared/dev.sh
+npm run dev
 ```
-
-This helper script runs `python manage.py runserver` and `npm run dev` concurrently.
