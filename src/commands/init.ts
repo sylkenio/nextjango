@@ -179,6 +179,17 @@ export async function init(options: InitOptions = {}) {
     return;
   }
 
+  try {
+    await execa(packageManager, ["--version"], { stdio: "ignore" });
+  } catch {
+    console.error(
+      chalk.red(
+        `❌ ${packageManager} is not installed. Please install it or rerun with --package-manager.`
+      )
+    );
+    return;
+  }
+
   const installSpinner = ora(
     `Installing frontend dependencies using ${packageManager}...`
   ).start();
