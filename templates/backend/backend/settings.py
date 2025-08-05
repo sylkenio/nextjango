@@ -7,8 +7,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "changeme")
-DEBUG = True
-ALLOWED_HOSTS: list[str] = []
+DEBUG = os.getenv("DEBUG", "False").lower() in ("1", "true", "yes")
+ALLOWED_HOSTS: list[str] = [
+    host for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -63,10 +65,14 @@ DATABASES = {
     }
 }
 
-CORS_ALLOWED_ORIGINS = os.getenv(
-    "CORS_ALLOWED_ORIGINS",
-    "http://localhost:3000"
-).split(",")
+CORS_ALLOWED_ORIGINS = [
+    origin
+    for origin in os.getenv(
+        "CORS_ALLOWED_ORIGINS",
+        "http://localhost:3000",
+    ).split(",")
+    if origin
+]
 
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
