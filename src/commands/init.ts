@@ -132,7 +132,8 @@ export async function init(options: InitOptions = {}) {
         ["-m", "pip", "install", "-r", "requirements.txt"],
         {
           cwd: backendDir,
-          stdio: "ignore",
+          stdout: "inherit",
+          stderr: "pipe",
         }
       );
       backendSpinner.succeed(
@@ -140,7 +141,11 @@ export async function init(options: InitOptions = {}) {
       );
     } catch (err) {
       backendSpinner.fail(chalk.red("Failed to install backend dependencies."));
-      console.error(err);
+      if (err instanceof Error && "stderr" in err && err.stderr) {
+        console.error(err.stderr);
+      } else {
+        console.error(err);
+      }
     }
 
     const managePyPath = path.join(backendDir, "manage.py");
@@ -205,13 +210,18 @@ export async function init(options: InitOptions = {}) {
   try {
     await execa(packageManager, ["install"], {
       cwd: frontendDir,
-      stdio: "ignore",
+      stdout: "inherit",
+      stderr: "pipe",
     });
     installSpinner.succeed(
       chalk.green(`Dependencies installed in frontend/ using ${packageManager}`)
     );
   } catch (err) {
     installSpinner.fail(chalk.red("Failed to install frontend dependencies."));
-    console.error(err);
+    if (err instanceof Error && "stderr" in err && err.stderr) {
+      console.error(err.stderr);
+    } else {
+      console.error(err);
+    }
   }
 }
