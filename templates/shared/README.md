@@ -7,7 +7,13 @@ Common utilities, types, or constants that are used by both the frontend and bac
 Run both the Django and Next.js development servers together:
 
 ```bash
-./shared/dev.sh
+npm run dev
+# or
+pnpm dev
+# or
+yarn dev
+# or
+bun dev
 ```
 
-This script starts `python manage.py runserver` for the backend and `npm run dev` for the frontend, shutting down both when one exits.
+This command starts `python manage.py runserver` for the backend and the chosen package manager's `dev` command for the frontend, shutting down both when one exits.
