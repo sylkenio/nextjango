@@ -70,5 +70,7 @@ CORS_ALLOWED_ORIGINS = [
     if origin
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [r"^http://localhost:\\d+$"] if DEBUG else []
+
 STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
