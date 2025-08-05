@@ -44,7 +44,7 @@ Initialize Nextjango in a project directory:
 npx nextjango init
 ```
 
-The CLI will prompt you to select a package manager if none is detected (use the arrow keys).
+🧙 The CLI will guide you to select a package manager with the arrow keys if none is found.
 
 You can also specify one manually:
 
