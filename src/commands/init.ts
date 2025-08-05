@@ -81,6 +81,18 @@ export async function init(options: InitOptions = {}) {
     process.exit(1);
   }
 
+  // Copy environment variable templates
+  const backendEnvExample = path.join(destination, "backend", ".env.example");
+  const backendEnv = path.join(destination, "backend", ".env");
+  if (existsSync(backendEnvExample) && !existsSync(backendEnv)) {
+    await copy(backendEnvExample, backendEnv);
+  }
+  const frontendEnvExample = path.join(destination, "frontend", ".env.example");
+  const frontendEnv = path.join(destination, "frontend", ".env.local");
+  if (existsSync(frontendEnvExample) && !existsSync(frontendEnv)) {
+    await copy(frontendEnvExample, frontendEnv);
+  }
+
   // Install backend dependencies using pip
   const backendDir = path.join(destination, "backend");
   const requirementsPath = path.join(backendDir, "requirements.txt");

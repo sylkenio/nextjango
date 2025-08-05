@@ -10,6 +10,7 @@ build/
 
 # Env and config
 .env*
+!**/.env.example
 .vscode/
 
 # System
