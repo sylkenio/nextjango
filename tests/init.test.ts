@@ -62,4 +62,29 @@ describe("init command", () => {
     process.chdir(original);
     rmSync(tmp, { recursive: true, force: true });
   });
+  it("aborts when Python is missing", async () => {
+    const tmp = mkdtempSync(path.join(tmpdir(), "init-"));
+    const backend = path.join(tmp, "backend");
+    mkdirSync(backend, { recursive: true });
+    writeFileSync(path.join(backend, "requirements.txt"), "");
+    const original = process.cwd();
+    process.chdir(tmp);
+
+    execaMock.mockReset();
+    execaMock.mockRejectedValueOnce(new Error("python not found"));
+    execaMock.mockResolvedValue({});
+
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+
+    await init();
+
+    expect(errorSpy).toHaveBeenCalled();
+    expect(execaMock).toHaveBeenCalledTimes(1);
+    expect(execaMock.mock.calls[0][0]).toBe("python");
+    expect(execaMock.mock.calls[0][1]).toEqual(["--version"]);
+
+    errorSpy.mockRestore();
+    process.chdir(original);
+    rmSync(tmp, { recursive: true, force: true });
+  });
 });

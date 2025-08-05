@@ -105,6 +105,16 @@ export async function init(options: InitOptions = {}) {
       )
     );
   } else {
+    try {
+      await execa("python", ["--version"], { stdio: "ignore" });
+    } catch {
+      console.error(
+        chalk.red(
+          "❌ Python is required to install backend dependencies. Please install Python and try again."
+        )
+      );
+      return;
+    }
     const backendSpinner = ora(
       "Installing backend dependencies using pip..."
     ).start();
