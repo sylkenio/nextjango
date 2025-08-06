@@ -1,8 +1,6 @@
 ![Nextjango Banner](https://github.com/sylkenio/nextjango/blob/master/main/assets/nextjango-github-banner.svg)
 
-# ⚡ Nextjango
-
-# (CURRENTLY IN DEVELOPMENT, STAY TUNED!)
+# ⚡ Nextjango (LIVE!)
 
 [![npm](https://img.shields.io/npm/v/nextjango.svg)](https://www.npmjs.com/package/nextjango)
 
@@ -59,6 +57,8 @@ Start both backend and frontend dev servers together:
 ```bash
 npm run dev
 ```
+
+## Feature not yet implemented (will be in a few days)
 
 Create a full-stack page (auto-wired front to back):
 
