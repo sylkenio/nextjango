@@ -1,6 +1,6 @@
 {
   "name": "nextjango",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CLI to scaffold fullstack Next.js + Django projects",
   "author": {
     "name": "Sylken",
